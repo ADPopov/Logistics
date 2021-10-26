@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import styled from "styled-components";
+import {Request} from "../../../models/Request";
 
 export const Stack = styled.div``
 export const ControlForm = styled.div``
@@ -31,7 +32,7 @@ export interface IRequestFormInput {
 }
 
 interface IRequestFormProps {
-    request: IRequestFormInput | null
+    request: Request | null
     register: any
 }
 
