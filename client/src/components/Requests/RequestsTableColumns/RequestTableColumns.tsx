@@ -44,11 +44,15 @@ export const COLUMNS = [
     accessor: "ATI",
     minWidth: 220,
     Cell: (row: CellProps<Row>) => {
-      return (
-        <a
-          href={`https://ati.su/firms/${row.value}/info`}
-        >{`https://ati.su/firms/${row.value}/info`}</a>
-      );
+      if(row.value!=0){
+        return (
+          <a
+            href={`https://ati.su/firms/${row.value}/info`}
+          >{`https://ati.su/firms/${row.value}/info`}</a>
+        );
+      } else
+        return ''
+
     },
   },
   {

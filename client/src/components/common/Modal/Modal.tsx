@@ -37,7 +37,7 @@ const Modal: FC<ModalProps> = ({ onClose, request, title }) => {
 
   const modalContainerRef = useRef(null);
   const { createRequest, fetchUpdateRequest } = useAction();
-  const { handleSubmit, register, formState: {errors} } = useForm<IRequestFormInput>({resolver: yupResolver(schema),  defaultValues: {ATI: '0'}});
+  const { handleSubmit, register, formState: {errors} } = useForm<IRequestFormInput>({resolver: yupResolver(schema),  defaultValues: request?.ATI ? {} : {ATI: '0'} });
 
   const clickOutsideHandler = () => onClose();
   useOnClickOutside(modalContainerRef, clickOutsideHandler);
