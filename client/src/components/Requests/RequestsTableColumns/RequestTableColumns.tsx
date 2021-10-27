@@ -44,7 +44,7 @@ export const COLUMNS = [
     accessor: "ATI",
     minWidth: 220,
     Cell: (row: CellProps<Row>) => {
-      if(row.value!=0){
+      if(row.value!==0){
         return (
           <a
             href={`https://ati.su/firms/${row.value}/info`}
