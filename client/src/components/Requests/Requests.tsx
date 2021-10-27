@@ -1,15 +1,15 @@
-import React, {useState} from "react";
-import {Column} from "react-table";
-import {Request} from "../../models/Request";
+import React, { useState } from "react";
+import { Column } from "react-table";
+import { Request } from "../../models/Request";
 import Modal from "../common/Modal/Modal";
 import Table from "../common/Table/Table";
-import {Flex, Header, PageHeader, Wrapper} from "./Requests.styled";
-import {ButtonWithIcon} from "../common/Button/ButtonWithIcon";
-import {COLUMNS} from "./RequestsTableColumns/RequestTableColumns";
-import {useTypeSelector} from "../../hooks/useTypeSelector";
-import {useAction} from "../../hooks/useAction";
+import { Flex, Header, PageHeader, Wrapper } from "./Requests.styled";
+import { ButtonWithIcon } from "../common/Button/ButtonWithIcon";
+import { COLUMNS } from "./RequestsTableColumns/RequestTableColumns";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
+import { useAction } from "../../hooks/useAction";
 import ToggleButton from "../common/ToggleButton/ToggleButton";
-import {IoMdAddCircleOutline} from "react-icons/io";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 const Requests = () => {
   const columns = React.useMemo(() => COLUMNS as Column<Request>[], []);
@@ -48,7 +48,9 @@ const Requests = () => {
         </Flex>
       </PageHeader>
       <Table columns={columns} data={data} isAdmin={isAdmin} />
-      {isOpen ? <Modal onClose={() => setIsOpen(false)} title={"Заявка"} /> : null}
+      {isOpen ? (
+        <Modal onClose={() => setIsOpen(false)} title={"Заявка"} />
+      ) : null}
     </Wrapper>
   );
 };
