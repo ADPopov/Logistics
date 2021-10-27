@@ -12,12 +12,12 @@ export const ModalContainer = styled.div`
   align-items: center;
   justify-content: center;
 `
-export const ModalWrapper = styled.main`
-  width: 480px;
+export const ModalWrapper = styled.div`
+  width: 330px;
   box-shadow: 0 8px 22px -6px rgba(18, 20, 23, 0.12), 0px 14px 64px -4px rgba(18, 20, 23, 0.12);
   border-radius: 24px;
   padding: 32px;
-  background-color: #3f3e3e;
+  background-color: #29292D;
   display: flex;
   color: white;
   flex-direction: column;

@@ -6,11 +6,11 @@ export const TableWrapper = styled.table`
 
   thead {
     display: block;
-    background-color: saddlebrown;
+    border-radius: 10px 10px 0 0;
+    background-color: #29292D;
   }
 
   th {
-    background-color: #29292D;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -24,6 +24,13 @@ export const TableWrapper = styled.table`
   td {
     padding: 7px 16px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+
+
+    :last-child {
+      justify-content: center;
+    }
   }
 
 
@@ -33,10 +40,8 @@ export const TableWrapper = styled.table`
     display: block;
     width: 100%;
 
-
     tr:hover {
-      background-color: #343434;
-      cursor: pointer;
+      background-color: rgba(73, 73, 73, 0.6);
     }
 
   }

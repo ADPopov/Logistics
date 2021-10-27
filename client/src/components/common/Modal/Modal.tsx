@@ -1,39 +1,76 @@
-import React, {FC, useRef} from 'react';
+import React, { FC, useRef } from "react";
 import ReactDOM from "react-dom";
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import RequestForm, {IRequestFormInput} from "../forms/RequestForm";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {Request} from "../../../models/Request";
-import {Button, Footer, ModalContainer, ModalWrapper, Title} from "./Modal.styled";
+import * as yup from 'yup'
+import {yupResolver} from "@hookform/resolvers/yup";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
+import RequestForm, { IRequestFormInput } from "../forms/RequestForm";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Request } from "../../../models/Request";
+import {
+  Button,
+  Footer,
+  ModalContainer,
+  ModalWrapper,
+  Title,
+} from "./Modal.styled";
+import { useAction } from "../../../hooks/useAction";
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 
-const Modal: FC<{ onClose: () => void, request?: Request | null }> = ({onClose, request}) => {
-    const modalContainerRef = useRef(null);
-    const clickOutsideHandler = () => onClose();
-    useOnClickOutside(modalContainerRef, clickOutsideHandler);
+interface ModalProps {
+  onClose: () => void;
+  request?: Request | null;
+  title: string;
+}
 
-    const onSubmit: SubmitHandler<IRequestFormInput> = data => {
-        console.log(data);
-        onClose();
+const Modal: FC<ModalProps> = ({ onClose, request, title }) => {
+  const schema = yup.object().shape({
+    client_full_name: yup.string().required(),
+    application_date: yup.string().required(),
+    company: yup.string().required(),
+    carrier_full_name: yup.string().required(),
+    mobile_number: yup.string().matches(phoneRegExp, 'Phone number is not valid').notRequired(),
+    comments: yup.string(),
+    ATI: yup.number().required(),
+  })
+
+  const modalContainerRef = useRef(null);
+  const { createRequest, fetchUpdateRequest } = useAction();
+  const { handleSubmit, register, formState: {errors} } = useForm<IRequestFormInput>({resolver: yupResolver(schema),  defaultValues: {ATI: '0'}});
+
+  const clickOutsideHandler = () => onClose();
+  useOnClickOutside(modalContainerRef, clickOutsideHandler);
+
+  const onSubmit: SubmitHandler<IRequestFormInput> = (data) => {
+    const newRequest = {
+      client_full_name: data.client_full_name,
+      application_date: data.application_date,
+      company: data.company,
+      carrier_full_name: data.carrier_full_name,
+      mobile_number: data.mobile_number,
+      comments: data.comments,
+      ATI: Number(data.ATI),
     };
+    request
+      ? fetchUpdateRequest(request.id, newRequest as Request)
+      : createRequest(newRequest as Request);
+    onClose();
+  };
 
-    const {
-        handleSubmit,
-        register,
-    } = useForm<IRequestFormInput>()
-
-    return ReactDOM.createPortal(
-        <ModalContainer>
-            <ModalWrapper ref={modalContainerRef}>
-                <Title>Заявка</Title>
-                <RequestForm request={request ? request : null} register={register}/>
-                <Footer>
-                    <Button>Отменить</Button>
-                    <Button onClick={handleSubmit(onSubmit)}>Сохранить</Button>
-                </Footer>
-            </ModalWrapper>
-        </ModalContainer>, document.getElementById('modal')!
-    )
+  return ReactDOM.createPortal(
+    <ModalContainer>
+      <ModalWrapper ref={modalContainerRef}>
+        <Title>{title}</Title>
+        <RequestForm request={request ? request : null} register={register} errors={errors} />
+        <Footer>
+          <Button onClick={() => onClose()}>Отменить</Button>
+          <Button onClick={handleSubmit(onSubmit)}>Сохранить</Button>
+        </Footer>
+      </ModalWrapper>
+    </ModalContainer>,
+    document.getElementById("modal")!
+  );
 };
 
 export default Modal;

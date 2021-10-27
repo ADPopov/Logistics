@@ -16,7 +16,6 @@ export const PageHeader = styled.div`
   justify-content: space-between;
 `;
 export const Header = styled.h1`
-  margin: 0;
   color: #E2E2E2
 `;
 export const ButtonWrapper = styled.button`
@@ -35,3 +34,11 @@ export const ButtonWrapper = styled.button`
     background-color: #c77701;
   }
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
+

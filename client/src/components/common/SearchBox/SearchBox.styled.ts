@@ -22,6 +22,7 @@ export const Input = styled.input`
   padding-left: 60px;
   width: 400px;
   border-radius: 5px;
+
   &:focus + ${Icon} {
     color: white;
   }
