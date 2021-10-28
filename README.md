@@ -1,4 +1,10 @@
 
+
+server: https://ligisticstestapp.herokuapp.com/
+
+client: https://yeticrabtest.herokuapp.com/
+
+
 ## Installation client
 
 ```bash
