@@ -7,7 +7,9 @@ export const Label = styled.div`
 `
 export const Wrapper = styled.div`
   background-color: #1d1d20;
-  padding: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  height: 100vh;
   color: white;
 `;
 export const PageHeader = styled.div`

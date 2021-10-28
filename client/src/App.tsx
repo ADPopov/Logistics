@@ -5,10 +5,6 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import { useAction } from "./hooks/useAction";
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 300px 4fr;
-  grid-template-rows: 100vh;
-  grid-template-areas: ". .";
 `;
 
 function App() {
@@ -20,7 +16,6 @@ function App() {
 
   return (
     <Container>
-      <Sidebar />
       <Requests />
     </Container>
   );

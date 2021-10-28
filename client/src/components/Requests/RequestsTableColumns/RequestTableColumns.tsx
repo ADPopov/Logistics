@@ -8,22 +8,20 @@ export const COLUMNS = [
     Cell: (row: CellProps<Row>) => {
       return row.row.index + 1;
     },
-    maxWidth: 40,
+    width: 40,
   },
   {
     Header: "Дата и время получения",
     accessor: "application_date",
-    maxWidth: 120,
+
   },
   {
     Header: "ФИО клиента",
     accessor: "client_full_name",
-    maxWidth: 180,
   },
   {
     Header: "Фирма клиента",
     accessor: "company",
-    maxWidth: 140,
   },
   {
     Header: "ФИО перевозчика",
@@ -32,12 +30,10 @@ export const COLUMNS = [
   {
     Header: "Контактный телефон перевозчика",
     accessor: "mobile_number",
-    maxWidth: 110,
   },
   {
     Header: "Комментарии",
     accessor: "comments",
-    minWidth: 280,
   },
   {
     Header: "ATI",
